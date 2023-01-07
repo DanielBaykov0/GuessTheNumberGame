@@ -16,8 +16,8 @@
         <a th:href="@{http://localhost:8080/}">Home</a>
     </h3>
 
-    <footer>
-        <p>Created by Daniel Baykov</p>
+    <footer th:replace="~{fragments/footer :: footer}">
+        <p>Footer</p>
     </footer>
 
 </div>
