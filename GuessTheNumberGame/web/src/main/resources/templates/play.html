@@ -5,21 +5,21 @@
     <title>Guess the Number Game</title>
 </head>
 <body>
-    <div align="center">
-        <h1>Guess the Number Game</h1>
-        <h3 th:text="${mainMessage}">Main Message Content</h3>
-        <h3 th:text="${resultMessage}">Result Message Content</h3>
+<div align="center">
+    <h1>Guess the Number Game</h1>
+    <h3 th:text="${__${T(baykov.daniel.util.AttributeNames).MAIN_MESSAGE}__}">Main Message Content</h3>
+    <h3 th:text="${__${T(baykov.daniel.util.AttributeNames).RESULT_MESSAGE}__}">Result Message Content</h3>
 
-        <form action="play" method="post">
-            <label for="guess">Enter your guess</label>
-            <input id="guess" type="number" name="guess"/>
-            <input type="submit" value="Submit"/>
-        </form>
+    <form th:action="@{__${T(baykov.daniel.util.GameMappings).PLAY}__}" action="play" method="post">
+        <label for="guess">Enter your guess</label>
+        <input id="guess" type="number" name="guess"/>
+        <input type="submit" value="Submit"/>
+    </form>
 
-        <footer>
-            <p>Created by Daniel Baykov</p>
-        </footer>
+    <footer>
+        <p>Created by Daniel Baykov</p>
+    </footer>
 
-    </div>
+</div>
 </body>
 </html>
