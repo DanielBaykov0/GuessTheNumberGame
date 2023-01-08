@@ -3,19 +3,26 @@ package baykov.daniel;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 public class MessageGeneratorImpl implements MessageGenerator{
 
+    // == constants ==
+    private static final String MAIN_MESSAGE = "game.main.message";
+
     // == fields ==
     private final Game game;
+    private final MessageSource messageSource;
 
     // == constructors ==
     @Autowired
-    public MessageGeneratorImpl(Game game) {
+    public MessageGeneratorImpl(Game game, MessageSource messageSource) {
         this.game = game;
+        this.messageSource = messageSource;
     }
 
     // == init ==
@@ -27,11 +34,12 @@ public class MessageGeneratorImpl implements MessageGenerator{
     // == public methods ==
     @Override
     public String getMainMessage() {
-        return "Number is between " +
-                game.getSmallest() +
-                " and " +
-                game.getBiggest() +
-                ". Can you guess it?";
+//        return "Number is between " +
+//                game.getSmallest() +
+//                " and " +
+//                game.getBiggest() +
+//                ". Can you guess it?";
+        return getMessage(MAIN_MESSAGE, game.getSmallest(), game.getBiggest());
     }
 
     @Override
@@ -53,5 +61,10 @@ public class MessageGeneratorImpl implements MessageGenerator{
 
             return direction + "! You have " + game.getRemainingGuesses() + " guesses left";
         }
+    }
+
+    // == private methods ==
+    private String getMessage(String code, Object... args) {
+        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 }
